@@ -31,17 +31,22 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   score = 0
-  dice.sort!
-  score += 1000 if dice #include 111
-  5.times {
-    case dice
-    when (dice.include? 1)
-      score += 100
-    when (dice.include? 5)
-      score += 50
+  arr = [0, 0, 0, 0, 0, 0]
+  dice.each do |d| 
+    score += 100 if d == 1
+    score += 50  if d == 5
+    arr[d - 1] += 1
+  end
+  arr.each do |a|
+    if(a >= 3 && arr.index(a) == 0)
+      score += 700
+    elsif a >= 3
+      score += 100*(arr.index(a)+1)
+      puts arr.index(a)
+      score -= 30*(arr.index(a)+1) if arr.index(a) == 4
     end
-  }
-  puts score
+  end
+  score
 end
 
 class AboutScoringProject < Neo::Koan
