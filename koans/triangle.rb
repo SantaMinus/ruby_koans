@@ -14,22 +14,18 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-	begin
-		if(a&&b&&c == 0 || a<0 || b<0 || c<0 || (a+b)<c || (a+c)<b || (b+c)<a) # optimise?
-			raise TriangleError, "This triangle can't exist"
-		else
-		  if(a == b && b == c)
+	a, b, c = [a, b, c].sort
+	if(a&&b&&c == 0 || a<0 || (a+b)<=c)
+		raise TriangleError, "This triangle can't exist"
+	else
+		if(a == c)
 		  	:equilateral
-		  elsif (a == b || b == c || a == c)
+		elsif (a == b || b == c)
 		  	:isosceles
-		  else
+		else
 		  	:scalene
-		  end
 		end
-	rescue TriangleError
-		TriangleError
 	end
-
 end
 
 # Error class used in part 2.  No need to change this code.
