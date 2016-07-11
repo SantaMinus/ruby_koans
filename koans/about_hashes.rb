@@ -96,6 +96,7 @@ class AboutHashes < Neo::Koan
     hash[:one] << "uno"
     hash[:two] << "dos"
 
+    # here the redefinition works
     assert_equal ["uno", "dos"], hash[:one]  # why not "uno"?
     assert_equal ["uno", "dos"], hash[:two]  # why not "dos"?
     assert_equal ["uno", "dos"], hash[:three] # why not []?
